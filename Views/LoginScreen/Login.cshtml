@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model WebNotes.Models.User.BaseResponse<WebNotes.Models.User.VMUserLogin>
+
+<form method="post" asp-action="Login">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    
+    <div class="page">
+        <nav class="header">
+            <h1 class="name">
+                Notes
+            </h1>
+        </nav>
+        
+        <div class="d-block w-25 m-auto p-5">
+            <h1 class="alert-add-note text-center">Войти</h1>
+            
+            <span class="d-flex justify-content-center text-danger fw-bold" asp-validation-for="User.Login"></span>
+            <input asp-for="User.Login" maxlength="20" type="text" class="w-100 m-1 user-data" placeholder="Введите логин"/>
+            
+            <span class="d-flex justify-content-center text-danger fw-bold" asp-validation-for="User.Password"></span>
+            <input asp-for="User.Password" type="password" maxlength="25" class="w-100 m-1 user-data" placeholder="Введите пароль"/>
+            
+            <button class="btn btn-secondary w-100 m-1" type="submit">Войти</button>
+            <a asp-action="Register" class="btn btn-outline-secondary w-100 m-1">Регистрация</a>
+        </div>
+        
+        @if (Model.Error.Description != null)
+        {
+            <div class="alert alert-warning alert-dismissible fade show w-25 d-flex justify-content-center m-auto" role="alert">
+                <strong>@Model.Error.Description</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    </div>
+</form>
+
+@section scripts{
+ 
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+

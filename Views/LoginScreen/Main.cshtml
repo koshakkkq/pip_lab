@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model WebNotes.Models.User.BaseResponse<WebNotes.Models.User.VMUserRegister>
+
+<div class="page h-100">
+
+    <h1 class="logo">Notes</h1>
+    <div class="info">
+        <h1>
+            Управляй своими
+            задачами легко и
+            эффективно!
+            Добавляй задачи, отмечай
+            их выполнение и следи за
+            прогрессом — всё в одном
+            месте.
+            Время — твой самый ценный ресурс.
+            Наш таск-менеджер поможет тебе
+            организовать свой день, расставить
+            приоритеты и достигать целей без
+            лишних усилий
+        </h1>
+    </div>
+        @if (Model.Error.Description != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show w-25 d-flex justify-content-center m-auto" role="alert">
+                <strong>@Model.Error.Description</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    
+    <div class="button-block">
+        <a class="m-3 p-3 button" asp-action="Login">Войти</a>
+        <a class="m-3 p-3 button" asp-action="Register">Зарегистрироваться</a>
+    </div>
+</div>
+
+@section scripts{
+ 
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

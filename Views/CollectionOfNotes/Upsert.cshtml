@@ -1,0 +1,56 @@
+﻿@model Note
+@{
+    string textInfo = "Создание заметки";
+}
+
+<form method="post" asp-action="Upsert">
+<input asp-for="@Model.Id" hidden/>
+<div class="page">
+    <nav class="header">
+        <h1 class="name">
+            Notes
+        </h1>
+        <div>
+
+        </div>
+    </nav>
+
+    <div class="d-block mb-5">
+        @if (Model.Id != 0 && Model.Id != null)
+        {
+            textInfo = "Изменение заметки";
+        }
+
+        <h2 class="title">@textInfo</h2>
+
+        <div class="input-note-grid">
+            <div class="w-100 me-3">
+                <textarea oninput="auto_grow(this)" style="min-height: 220px;" maxlength="250" type="text" class="input-note w-100" required placeholder="Введите заголовок" asp-for="@Model.Title">@Model.Title</textarea>
+                <textarea oninput="auto_grow(this)" style="min-height: 580px;" maxlength="1000" type="text" class="input-note w-100" placeholder="Введите содержание" asp-for="@Model.Description">@Model.Description</textarea>
+            </div>
+            <div class="w-auto align-items-center">
+                <a asp-action="Grid" class=" d-block upgrade-btn back w-100">
+                    Вернуться
+                </a>
+                <button class="d-block upgrade-btn scs w-100" type="submit">Сохранить</button>
+                @if (Model.Id != 0 && Model.Id != null)
+                {
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class=" d-block upgrade-btn remove w-100">
+                        Удалить
+                    </a>
+                }
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</form>
+
+@section Scripts {
+        <script>
+            function auto_grow(element) {
+                element.style.height = (element.scrollHeight)+"px";
+            }
+        </script>
+}

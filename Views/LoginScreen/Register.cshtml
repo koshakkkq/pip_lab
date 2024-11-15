@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model WebNotes.Models.User.BaseResponse<WebNotes.Models.User.VMUserRegister>
+
+<form method="post" asp-action="Register">
+    <div class="page">
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <nav class="header">
+            <h1 class="name">
+                Notes
+            </h1>
+        </nav>
+
+        <div class="d-block w-25 m-auto p-5">
+            <h1 class="alert-add-note text-center">Регистрация</h1>
+
+            <span class="d-flex justify-content-center text-danger fw-bold" asp-validation-for="User.Login"></span>
+            <input asp-for="User.Login" minlength="8" maxlength="20" type="text" class="w-100 m-1 user-data" placeholder="Введите логин"/>
+
+            <span class="d-flex justify-content-center text-danger fw-bold" asp-validation-for="User.Password"></span>
+            <input asp-for="User.Password" type="text" minlength="8" maxlength="25" class="w-100 m-1 user-data" placeholder="Введите пароль"/>
+
+            <span class="d-flex justify-content-center text-danger fw-bold" asp-validation-for="User.ConfirmPassword"></span>
+            <input asp-for="User.ConfirmPassword" type="text" minlength="8" required maxlength="25" class="w-100 m-1 user-data" placeholder="Повторите пароль"/>
+
+            <button class="btn btn-secondary w-100 m-1" type="submit">Зарегистрироваться</button>
+            <a asp-action="Login" class="btn btn-outline-secondary w-100 m-1">Войти</a>
+        </div>
+        
+                
+        @if (Model.Error.Description != null && Model.Error.Description != "Пользователь успешно создан")
+        {
+            <div class="alert alert-danger alert-dismissible fade show w-25 d-flex justify-content-center m-auto" role="alert">
+                <strong>@Model.Error.Description</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+        }
+        else if (Model.Error.Description != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show w-25 d-flex justify-content-center m-auto" role="alert">
+                <strong>@Model.Error.Description</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    </div>
+</form>
+
+@section scripts{
+ 
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
